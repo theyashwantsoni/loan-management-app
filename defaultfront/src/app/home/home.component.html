@@ -1,0 +1,119 @@
+<nav class="navbar">
+    <a class="navbar-brand">Loan Management app </a>
+      <!-- <form  class="form-inline"> -->
+          <!-- <input class="form-control mr-sm-2"  type="search" placeholder="Search" aria-label="Search"> -->
+          <!-- <input  type="submit"  (click)="search()" value="search"> -->
+          <input type="text" [(ngModel)]="term" class="form-control mr-sm-2"  type="search" placeholder="Search" aria-label="Search">
+      <!-- </form> -->
+  </nav>
+  <style>
+    th,td{
+      max-width: 150px;
+      min-width: 150px;
+      text-align: center;
+      
+    }
+    tr td{
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+        
+        white-space: nowrap;
+    }
+  </style>
+    <div class="limiter" style="width:100%;">
+      <div class="container-table100" style="padding: 0px;align-items: normal;padding-top:25px;">
+        <div class="wrap-table100">
+  
+          <div class="table100 ver3 m-b-110">
+            <div class="table100-head">
+              <table>
+                <thead>
+                  <tr class="row100 head">
+                    <th class="cell100 ">Member ID</th>
+                    <th class="cell100 ">V-Status</th>
+                    <th class="cell100 ">Loan-status</th>
+                    <th class="cell100 ">Home Own</th>
+                    <th class="cell100 ">Annual Inc</th>
+                    <th class="cell100 ">View</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+  
+            <div class="table100-body js-pscroll">
+              <table>
+                
+                <tr *ngFor="let item of collection | filter:term |paginate: { itemsPerPage: 10, currentPage: p } ">
+                  <!-- <div *ngFor="let item of collection | filter:term |paginate: { itemsPerPage: 100, currentPage: p } "> -->
+                  <td class="row100 body" >
+                      {{item.member_id}}
+                  </td>
+                  <td class="row100 body" >
+                      {{item.verification_status}}
+                  </td>
+                  <td class="row100 body">
+                      {{item.loan_status}}
+                  </td>
+                  <td class="row100 body" >
+                      {{item.home_ownership}}
+                  </td>
+                  <td class="row100 body" >
+                      {{item.annual_inc}}
+                  </td>
+                  <td class="row100 body" >
+                      <button style="color: white" (click)="onSelect(item.member_id)">view</button>
+                  </td>
+                  <!-- </div> -->
+                </tr>
+              </table>
+            </div>
+          </div>
+  
+        </div>
+          
+      </div>
+    </div>
+  <!-- <ul>
+    <li *ngFor="let item of collection | filter:term |paginate: { itemsPerPage: 100, currentPage: p } "> {{item._id}} </li>
+  </ul> -->
+  
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+<br><br>
+    <div style="display:inline;">
+        
+        <div style="height: 370px; width: 50%;display: inline-block;float: left;">
+            <select (change)="curve($event.target.value)">
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="201-">other</option>
+      
+              </select>
+            <div id="chartContainer" ></div>
+        </div>
+        
+        <div  style="height: 370px; width: 50%;display: inline-block;padding: 10px;">
+          <div style="display:inline;">
+            <div style="height: 370px; width: 50%;display: inline-block;float: left;">
+              <h2>Top 10 customers by loan amount verified</h2>
+                <ul>
+                    <li>member-id | amount</li>
+                    <li  *ngFor="let item of topverified">{{item.member_id}} | {{item.loan_amnt}}</li>
+
+                </ul>
+            </div>
+            <div  style="height: 370px; width: 50%;display: inline-block;">
+                <h2>Top 10 customers by loan amount non-verified</h2>
+                <ul>
+                    <li>member-id | amount</li>
+                    <li  *ngFor="let item of topnotverified">{{item.member_id}} | {{item.loan_amnt}}</li>
+                </ul>
+            </div>
+          </div>
+            
+        </div>
+      
+    </div>
+ 
+
+ 
