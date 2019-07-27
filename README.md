@@ -6,6 +6,8 @@ db.loans.find({"verification_status":"Verified"}).sort({"loan_amnt":-1}).limit(1
 db.loans.find({"issue_d":/.*m.*/}).sort({"int_rate":-1}).limit(10)
 
 Post.find({}).sort('test').exec(function(err, docs) { ... });
+
+
 ==========
 
 ## Tech Stack used - Angular, Express, Mongo
